@@ -8,9 +8,23 @@ import HelloWorld from "../components/HelloWorld.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "hello",
+    name: "home",
     component: HelloWorld,
-    props: { msg: "123" },
+  },
+  {
+    path: "/user/login",
+    name: "userLogin",
+    component: HelloWorld,
+  },
+  {
+    path: "/user/register",
+    name: "userRegister",
+    component: HelloWorld,
+  },
+  {
+    path: "/admin/userManage",
+    name: "adminUserManage",
+    component: HelloWorld,
   },
 ];
 

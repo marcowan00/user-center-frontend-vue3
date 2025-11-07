@@ -1,7 +1,4 @@
 <template>
-  <a-button type="primary" danger>Primary</a-button>
-  <h1>{{ msg }}</h1>
-
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
@@ -29,8 +26,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-
-defineProps<{ msg: string }>();
 
 const count = ref(0);
 </script>
