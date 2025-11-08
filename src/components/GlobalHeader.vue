@@ -44,6 +44,7 @@ router.afterEach((to) => {
   current.value = [to.path];
 });
 
+// 如何统一配置路由和菜单项？
 const items = ref<MenuProps["items"]>([
   {
     key: "/",
