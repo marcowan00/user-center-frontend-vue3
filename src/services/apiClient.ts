@@ -6,7 +6,7 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
-// 添加请求拦截器
+// 请求拦截器
 apiClient.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
@@ -18,17 +18,14 @@ apiClient.interceptors.request.use(
   }
 );
 
-// 添加响应拦截器
+// 响应拦截器
 apiClient.interceptors.response.use(
   (response) => {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
-    console.log("响应拦截器开始");
-    console.log(response);
-
+    console.log("拦截器response: ", response);
     const { data } = response;
-    console.log(data);
-    console.log("响应拦截器结束");
+    console.log("拦截器response.data: ", data);
 
     if (data.code === 40100) {
       if (
