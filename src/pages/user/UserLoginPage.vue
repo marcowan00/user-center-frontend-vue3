@@ -13,13 +13,13 @@
       @finishFailed="onSubmitFailed"
     >
       <a-form-item
-        label="用户名"
+        label="账号"
         name="userAccount"
-        :rules="[{ required: true, message: '请输入用户名' }]"
+        :rules="[{ required: true, message: '请输入账号' }]"
       >
         <a-input
           v-model:value="formState.userAccount"
-          placeholder="请输入用户名！"
+          placeholder="请输入账号"
         />
       </a-form-item>
 
@@ -45,11 +45,11 @@
 </template>
 
 <script lang="ts" setup>
+import { message } from "ant-design-vue";
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import { userLogin } from "../../services/user";
 import useLoginUserStore from "../../stores/useLoginUserStore";
-import { message } from "ant-design-vue";
-import { useRouter } from "vue-router";
 
 interface FormState {
   userAccount: string;
@@ -65,7 +65,6 @@ const router = useRouter();
 const loginUserStore = useLoginUserStore();
 
 const handleSubmit = async (values: any) => {
-  console.log("Success:", values);
   const res = await userLogin(values);
 
   // 登录成功，保存登录状态到全局状态中，并跳转至主页
@@ -76,6 +75,8 @@ const handleSubmit = async (values: any) => {
       path: "/",
       replace: true,
     });
+  } else {
+    message.error("登录失败！");
   }
 };
 

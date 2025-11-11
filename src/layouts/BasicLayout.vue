@@ -2,7 +2,7 @@
   <div id="basicLayout">
     <a-layout>
       <a-layout-header class="header">
-        <GlobalHeader />
+        <NavBar />
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import GlobalHeader from "../components/GlobalHeader.vue";
+import NavBar from "../components/NavBar.vue";
 </script>
 
 <style scoped>

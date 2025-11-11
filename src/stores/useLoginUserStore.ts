@@ -10,7 +10,8 @@ const useLoginUserStore = defineStore("loginUser", () => {
   // 从后端获取当前登录用户信息
   const fetchLoginUser = async () => {
     const res = await getCurrentUser();
-    if (res.data.code === 0 && res.data.code) {
+
+    if (res.data.code === 0 && res.data.data) {
       loginUser.value = res.data.data;
     }
     // else {

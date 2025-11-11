@@ -21,13 +21,12 @@ apiClient.interceptors.request.use(
 // 响应拦截器
 apiClient.interceptors.response.use(
   (response) => {
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
-    console.log("拦截器response: ", response);
-    const { data } = response;
-    console.log("拦截器response.data: ", data);
+    // 对响应数据的操作。2xx 范围内的状态码都会触发该函数。
+    console.log("[响应拦截器] response: ", response);
+    // const { data } = response;
+    // console.log("response.data: ", data);
 
-    if (data.code === 40100) {
+    if (response.data.code === 40100) {
       if (
         !response.request.responseURL.includes("user/current") &&
         !window.location.pathname.includes("/user/login")

@@ -1,5 +1,5 @@
 <template>
-  <div id="globalHeader">
+  <div id="navBar">
     <a-row :wrap="false">
       <a-col flex="200px">
         <div class="title-bar">
