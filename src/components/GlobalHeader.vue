@@ -16,7 +16,7 @@
         />
       </a-col>
       <a-col flex="80px">
-        <!-- 用户登录状态，已登录显示用户名，未登录显示登录按钮 -->
+        <!-- 条件渲染用户登录状态。已登录显示用户名，未登录显示登录按钮 -->
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
             {{ loginUserStore.loginUser.username ?? "未命名" }}

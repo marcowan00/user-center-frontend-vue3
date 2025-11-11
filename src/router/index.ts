@@ -4,27 +4,31 @@ import {
   type RouteRecordRaw,
 } from "vue-router";
 import HelloWorld from "../components/HelloWorld.vue";
+import HomePage from "../pages/HomePage.vue";
+import UserLoginPage from "../pages/user/UserLoginPage.vue";
+import UserRegisterPage from "../pages/user/UserRegisterPage.vue";
+import UserManagePage from "../pages/admin/UserManagePage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: HelloWorld,
+    component: HomePage,
   },
   {
     path: "/user/login",
     name: "userLogin",
-    component: HelloWorld,
+    component: UserLoginPage,
   },
   {
     path: "/user/register",
     name: "userRegister",
-    component: HelloWorld,
+    component: UserRegisterPage,
   },
   {
     path: "/admin/userManage",
     name: "adminUserManage",
-    component: HelloWorld,
+    component: UserManagePage,
   },
 ];
 
