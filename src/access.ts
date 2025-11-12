@@ -3,7 +3,7 @@ import type { Router } from "vue-router";
 import useLoginUserStore from "./stores/useLoginUserStore";
 
 const setupAccessControl = (router: Router) => {
-  router.beforeEach((to, from, next) => {
+  router.beforeEach((to, _from, next) => {
     const loginUserStore = useLoginUserStore();
     const loginUser = loginUserStore.loginUser;
 

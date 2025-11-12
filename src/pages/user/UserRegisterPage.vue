@@ -108,6 +108,7 @@ const handleSubmit = async (values: any) => {
 
   // 注册成功，跳转到登录页面
   if (res.data.code === 0 && res.data.data) {
+    message.success("注册成功！跳转至登录");
     router.push({
       path: "/user/login",
       replace: true,

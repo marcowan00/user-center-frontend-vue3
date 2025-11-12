@@ -5,8 +5,6 @@
 </template>
 
 <script setup>
-import useLoginUserStore from "../stores/useLoginUserStore";
-
 const msg = "欢迎来到用户中心！";
 </script>
 

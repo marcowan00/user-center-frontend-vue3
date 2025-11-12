@@ -1,46 +1,52 @@
 <template>
   <div id="userLoginPage">
-    <h2 class="title">用户登录</h2>
-    <a-form
-      style="max-width: 480px; margin: 0 auto"
-      :model="formState"
-      name="basic"
-      labelAlign="left"
-      :label-col="{ span: 4 }"
-      :wrapper-col="{ span: 20 }"
-      autocomplete="off"
-      @finish="handleSubmit"
-      @finishFailed="onSubmitFailed"
-    >
-      <a-form-item
-        label="账号"
-        name="userAccount"
-        :rules="[{ required: true, message: '请输入账号' }]"
+    <div v-if="!loginUserStore.loginUser.id">
+      <h2 class="title">用户登录</h2>
+      <a-form
+        style="max-width: 480px; margin: 0 auto"
+        :model="formState"
+        name="basic"
+        labelAlign="left"
+        :label-col="{ span: 4 }"
+        :wrapper-col="{ span: 20 }"
+        autocomplete="off"
+        @finish="handleSubmit"
+        @finishFailed="onSubmitFailed"
       >
-        <a-input
-          v-model:value="formState.userAccount"
-          placeholder="请输入账号"
-        />
-      </a-form-item>
+        <a-form-item
+          label="账号"
+          name="userAccount"
+          :rules="[{ required: true, message: '请输入账号' }]"
+        >
+          <a-input
+            v-model:value="formState.userAccount"
+            placeholder="请输入账号"
+          />
+        </a-form-item>
 
-      <a-form-item
-        label="密码"
-        name="userPassword"
-        :rules="[
-          { required: true, message: '请输入密码' },
-          { min: 8, message: '密码不能少于8位' },
-        ]"
-      >
-        <a-input-password
-          v-model:value="formState.userPassword"
-          placeholder="请输入密码"
-        />
-      </a-form-item>
+        <a-form-item
+          label="密码"
+          name="userPassword"
+          :rules="[
+            { required: true, message: '请输入密码' },
+            { min: 8, message: '密码不能少于8位' },
+          ]"
+        >
+          <a-input-password
+            v-model:value="formState.userPassword"
+            placeholder="请输入密码"
+          />
+        </a-form-item>
 
-      <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
-        <a-button type="primary" html-type="submit">登录</a-button>
-      </a-form-item>
-    </a-form>
+        <a-form-item :wrapper-col="{ offset: 4, span: 20 }">
+          <a-button type="primary" html-type="submit">登录</a-button>
+        </a-form-item>
+      </a-form>
+    </div>
+    <div v-else>
+      <h1>当前已登录账号：{{ loginUserStore.loginUser.userAccount }}</h1>
+      <a-button @click="() => onLogout()">退出登录</a-button>
+    </div>
   </div>
 </template>
 
@@ -48,7 +54,7 @@
 import { message } from "ant-design-vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import { userLogin } from "../../services/user";
+import { userLogin, userLogout } from "../../services/user";
 import useLoginUserStore from "../../stores/useLoginUserStore";
 
 interface FormState {
@@ -82,6 +88,13 @@ const handleSubmit = async (values: any) => {
 
 const onSubmitFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
+};
+
+const onLogout = async () => {
+  userLogout(loginUserStore.loginUser);
+  await loginUserStore.fetchLoginUser();
+  message.success("已退出账号，请重新登录");
+  router.push({ path: "/user/login" });
 };
 </script>
 

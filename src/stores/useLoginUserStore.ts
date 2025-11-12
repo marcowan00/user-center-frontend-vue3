@@ -15,6 +15,10 @@ const useLoginUserStore = defineStore(
 
       if (res.data.code === 0 && res.data.data) {
         loginUser.value = res.data.data;
+      } else if (res.data.code) {
+        loginUser.value = {
+          username: "未登录",
+        };
       }
     };
 

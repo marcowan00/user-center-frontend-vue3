@@ -12,14 +12,17 @@
           v-model:selectedKeys="current"
           mode="horizontal"
           :items="items"
-          @click="doMenuClick"
+          @click="onMenuClick"
         />
       </a-col>
       <a-col flex="auto">
         <!-- 条件渲染用户登录状态。已登录显示用户名，未登录显示登录按钮 -->
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
-            {{ (loginUserStore.loginUser.username ?? "未命名") + ", 你好！" }}
+            {{
+              (loginUserStore.loginUser.userAccount ?? "未命名") + ", 你好！"
+            }}
+            <a-button @click="() => onLogout()">退出</a-button>
           </div>
           <div v-else>
             <a-button type="primary" href="/user/login">登录</a-button>
@@ -32,19 +35,27 @@
 
 <script lang="ts" setup>
 import { CrownOutlined, HomeOutlined } from "@ant-design/icons-vue";
-import type { MenuProps } from "ant-design-vue";
+import { message, type MenuProps } from "ant-design-vue";
 import { h, ref } from "vue";
 import { useRouter } from "vue-router";
 import useLoginUserStore from "../stores/useLoginUserStore";
+import { userLogout } from "../services/user";
 
 const loginUserStore = useLoginUserStore();
 
 const router = useRouter();
 
-const doMenuClick = ({ key }: { key: string }) => {
+const onMenuClick = ({ key }: { key: string }) => {
   router.push({
     path: key,
   });
+};
+
+const onLogout = async () => {
+  userLogout(loginUserStore.loginUser);
+  await loginUserStore.fetchLoginUser();
+  message.success("已退出账号，请重新登录");
+  router.push({ path: "/user/login" });
 };
 
 const current = ref<string[]>(["mail"]);
