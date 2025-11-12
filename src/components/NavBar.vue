@@ -54,6 +54,9 @@ const onMenuClick = ({ key }: { key: string }) => {
 const onLogout = async () => {
   userLogout(loginUserStore.loginUser);
   await loginUserStore.fetchLoginUser();
+  loginUserStore.loginUser.value = {
+    username: "未登录",
+  };
   message.success("已退出账号，请重新登录");
   router.push({ path: "/user/login" });
 };

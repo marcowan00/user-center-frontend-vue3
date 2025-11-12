@@ -8,7 +8,7 @@ const setupAccessControl = (router: Router) => {
     const loginUser = loginUserStore.loginUser;
 
     if (to.fullPath.startsWith("/admin")) {
-      if (!loginUser.id || loginUser.userRole !== 0) {
+      if (!loginUser.id || loginUser.userRole !== 1) {
         message.error("请登录管理员账号后重试");
         next(`/user/login?redirect=${to.fullPath}`);
         return;
