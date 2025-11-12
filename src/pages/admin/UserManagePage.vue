@@ -33,15 +33,18 @@
           {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
         </template>
         <template v-else-if="column.key === 'action'">
-          <a-popconfirm
-            title="确认删除该用户？"
-            ok-text="删除"
-            cancel-text="取消"
-            @confirm="(e: MouseEvent)=>confirm(e, record.id)"
-            @cancel="cancel"
-          >
-            <a-button type="primary" danger>删除用户</a-button>
-          </a-popconfirm>
+          <div v-if="record.id !== loginUserStore.loginUser.id">
+            <a-popconfirm
+              title="确认删除该用户？"
+              ok-text="删除"
+              cancel-text="取消"
+              @confirm="(e: MouseEvent)=>confirm(e, record.id)"
+              @cancel="cancel"
+            >
+              <a-button type="primary" danger>删除用户</a-button>
+            </a-popconfirm>
+          </div>
+          <div v-else>当前用户</div>
         </template>
       </template>
     </a-table>
@@ -53,8 +56,11 @@ import { deleteUser, searchUsers } from "../../services/user";
 import { ref } from "vue";
 import { message } from "ant-design-vue";
 import dayjs from "dayjs";
+import useLoginUserStore from "../../stores/useLoginUserStore";
 
 const searchValue = ref<string>("");
+
+const loginUserStore = useLoginUserStore();
 
 const onSearch = () => {
   console.log("搜索用户: " + searchValue.value);
@@ -97,14 +103,14 @@ const columns = [
     title: "账号",
     dataIndex: "userAccount",
   },
-  {
-    title: "头像",
-    dataIndex: "avatarUrl",
-  },
-  {
-    title: "性别",
-    dataIndex: "gender",
-  },
+  // {
+  //   title: "头像",
+  //   dataIndex: "avatarUrl",
+  // },
+  // {
+  //   title: "性别",
+  //   dataIndex: "gender",
+  // },
   {
     title: "创建时间",
     dataIndex: "createTime",
