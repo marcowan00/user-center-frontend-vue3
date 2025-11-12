@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080",
-  // process.env.NODE_ENV === "development"
-  //   ? "http://localhost:8080"
-  //   : "https://codefather.cn",
+  baseURL:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:8080"
+      : "https://192.168.9.85",
   timeout: 10000,
   withCredentials: true,
 });
