@@ -15,11 +15,11 @@
           @click="doMenuClick"
         />
       </a-col>
-      <a-col flex="80px">
+      <a-col flex="auto">
         <!-- 条件渲染用户登录状态。已登录显示用户名，未登录显示登录按钮 -->
         <div class="user-login-status">
           <div v-if="loginUserStore.loginUser.id">
-            {{ loginUserStore.loginUser.username ?? "未命名" }}
+            {{ (loginUserStore.loginUser.username ?? "未命名") + ", 你好！" }}
           </div>
           <div v-else>
             <a-button type="primary" href="/user/login">登录</a-button>
@@ -103,5 +103,9 @@ const items = ref<MenuProps["items"]>([
 
 .logo {
   height: 48px;
+}
+
+.user-login-status {
+  text-align: right;
 }
 </style>

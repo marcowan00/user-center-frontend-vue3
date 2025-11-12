@@ -7,6 +7,7 @@ import UserManagePage from "../pages/admin/UserManagePage.vue";
 import HomePage from "../pages/HomePage.vue";
 import UserLoginPage from "../pages/user/UserLoginPage.vue";
 import UserRegisterPage from "../pages/user/UserRegisterPage.vue";
+import setupAccessControl from "../access";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,5 +36,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
+
+setupAccessControl(router);
 
 export default router;

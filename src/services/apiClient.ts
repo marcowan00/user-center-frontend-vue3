@@ -22,7 +22,7 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => {
     // 对响应数据的操作。2xx 范围内的状态码都会触发该函数。
-    console.log("[响应拦截器] response: ", response);
+    console.log("response: ", response);
     // const { data } = response;
     // console.log("response.data: ", data);
 
